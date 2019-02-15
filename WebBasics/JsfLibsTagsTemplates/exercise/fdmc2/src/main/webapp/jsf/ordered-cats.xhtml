@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="templates/base-layout.xhtml">
+
+    <ui:define name="main-content">
+
+        <div class="jumbotron justify-content-center jumbotron-background">
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h1>All Cats!</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h:form>
+                        <div class="row">
+                            <div class="col col-md-12 d-flex justify-content-center">
+                                <h:commandButton action="#{allCatsBean.orderByColumn}" value="Order"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-md-12 d-flex justify-content-center">
+                                <h:selectOneMenu value="#{allCatsBean.orderBy}">
+                                    <f:selectItem itemValue="NONE" itemLabel="Select column ..."/>
+                                    <f:selectItem itemValue="name" itemLabel="Name"/>
+                                    <f:selectItem itemValue="breed" itemLabel="Breed"/>
+                                    <f:selectItem itemValue="color" itemLabel="Color"/>
+                                    <f:selectItem itemValue="gender" itemLabel="Gender"/>
+                                    <f:selectItem itemValue="price" itemLabel="Price"/>
+                                    <f:selectItem itemValue="addedOn" itemLabel="AddedOn"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+
+            <hr class="hr-background"/>
+
+            <h:dataTable value="#{orderedCatsBean.orderedCats}" var="cat" styleClass="table table-striped">
+                <h:column>
+                    <f:facet name="header">
+                        Name
+                    </f:facet>
+                    #{cat.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Breed</f:facet>
+                    #{cat.breed}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Color</f:facet>
+                    #{cat.color}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Gender</f:facet>
+                    #{cat.gender}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputText value="#{cat.price}">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Added On</f:facet>
+                    <h:outputText value="#{cat.addedOn}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </h:column>
+
+            </h:dataTable>
+        </div>
+
+
+
+    </ui:define>
+
+
+</ui:composition>
+
+</html>
