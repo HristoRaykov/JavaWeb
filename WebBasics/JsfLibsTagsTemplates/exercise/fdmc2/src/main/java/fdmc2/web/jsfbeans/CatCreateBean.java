@@ -5,7 +5,6 @@ import fdmc2.domain.models.services.CatServiceModel;
 import fdmc2.service.CatService;
 import org.modelmapper.ModelMapper;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,7 +32,10 @@ public class CatCreateBean {
 	
 	public void registerCat() throws IOException {
 		CatServiceModel catServiceModel = this.modelMapper.map(catCreateBindingModel,CatServiceModel.class);
-		this.catService.save(catServiceModel);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/jsf/all-cats.xhtml");
+		if (this.catService.save(catServiceModel)) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/jsf/all-cats.xhtml");
+		}else {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/jsf/cat-create.xhtml");
+		}
 	}
 }

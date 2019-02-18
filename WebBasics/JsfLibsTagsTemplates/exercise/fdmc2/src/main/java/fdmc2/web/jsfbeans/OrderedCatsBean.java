@@ -21,6 +21,7 @@ public class OrderedCatsBean {
 	public void orderByColumn() throws IOException {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.setAttribute("orderByColumnName", orderBy);
+		
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/jsf/all-cats.xhtml");
 	}
 }

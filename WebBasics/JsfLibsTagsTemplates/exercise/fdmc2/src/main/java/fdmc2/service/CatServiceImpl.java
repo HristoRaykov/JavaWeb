@@ -26,6 +26,10 @@ public class CatServiceImpl implements CatService {
 	
 	@Override
 	public boolean save(CatServiceModel catServiceModel){
+		if (!this.validatorUtil.isValid(catServiceModel)){
+			return false;
+		}
+		
 		Cat cat = this.modelMapper.map(catServiceModel,Cat.class);
 		
 		Optional<Cat> savedCat = this.catRepository.save(cat);
