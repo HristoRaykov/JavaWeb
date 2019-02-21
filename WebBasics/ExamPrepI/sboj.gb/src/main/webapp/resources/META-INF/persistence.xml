@@ -2,10 +2,10 @@
 <persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence  	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
-    <persistence-unit name="exam" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="sboj" transaction-type="RESOURCE_LOCAL">
 
         <properties>
-            <property name = "hibernate.connection.url" value="jdbc:mysql://localhost:3306/exam_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
+            <property name = "hibernate.connection.url" value="jdbc:mysql://localhost:3306/sboj_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
             <property name = "hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
             <property name = "hibernate.connection.username" value="root"/>
             <property name = "hibernate.connection.password" value=""/>

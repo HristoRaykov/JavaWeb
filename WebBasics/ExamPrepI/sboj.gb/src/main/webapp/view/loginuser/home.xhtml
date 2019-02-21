@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<ui:composition template="/view/templates/base-layout.xhtml">
+
+    <ui:define name="main-body">
+
+        <hr class="my-3"/>
+        <div class="text-center mb-3">
+            <h4 class="text-info">Welcome, #{session.getAttribute("username")}</h4>
+        </div>
+        <hr class="my-3"/>
+        <div class="container">
+
+            <c:forEach items="#{userHomeBean.jobApps}" var="jobApp" varStatus="iter">
+
+                <h:outputText escape="false" rendered="#{iter.index%3==0}"
+                              value="&lt;div class=&quot;row mb-4 d-flex justify-content-around&quot;&gt;"/>
+                <div class="col-md-3 d-flex flex-column text-center">
+                    <h:graphicImage library="lib" name="/jpg/#{jobApp.sector}.jpg" class="img-thumbnail" width="300"
+                                    height="300"/>
+                    <h5 class="text-center">#{jobApp.profession}</h5>
+                    <h:link outcome="/view/jobs/job-details.xhtml?id=#{jobApp.id}" class="btn btn-info">Details</h:link>
+                    <h:link outcome="/view/jobs/job-delete.xhtml?id=#{jobApp.id}" value="Delete"
+                                     class="btn btn-danger"/>
+
+                </div>
+                <h:outputText escape="false" rendered="#{iter.index%3==2}"
+                              value="&lt;/div&gt;"/>
+            </c:forEach>
+            <h:outputText escape="false" rendered="#{userHomeBean.jobApps.size%3==0}"
+                          value="&lt;/div&gt;"/>
+
+
+        </div>
+        <hr class="my-3"/>
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>
+
+
