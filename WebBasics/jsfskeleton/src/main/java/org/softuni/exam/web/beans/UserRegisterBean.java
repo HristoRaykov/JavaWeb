@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Optional;
 
 @Named
 @RequestScoped
@@ -45,12 +46,16 @@ public class UserRegisterBean extends BaseBean {
     public void register() {
         if(!this.userRegisterBindingModel.getPassword()
                 .equals(this.userRegisterBindingModel.getConfirmPassword())) {
-            this.redirect("/view/guestuser/register.xhtml");
+            this.redirect("/view/register.xhtml");
             return;
         }
 
-        this.userService.createUser(
+        Optional<UserServiceModel> userServiceModel = this.userService.createUser(
                 this.modelMapper.map(this.userRegisterBindingModel, UserServiceModel.class));
-        this.redirect("/view/guestuser/login.xhtml");
+        if (userServiceModel.isPresent()) {
+	        this.redirect("/view/login.xhtml");
+        }else {
+	        this.redirect("/view/register.xhtml");
+        }
     }
 }

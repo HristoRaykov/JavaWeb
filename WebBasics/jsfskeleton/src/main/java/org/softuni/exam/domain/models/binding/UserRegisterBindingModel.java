@@ -5,7 +5,7 @@ public class UserRegisterBindingModel {
     private String username;
     private String password;
     private String confirmPassword;
-    private String email;
+    
 
     public UserRegisterBindingModel() {
     }
@@ -34,11 +34,5 @@ public class UserRegisterBindingModel {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    
 }

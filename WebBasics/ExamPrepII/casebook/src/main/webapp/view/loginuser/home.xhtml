@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<ui:composition template="/view/templates/base-layout.xhtml">
+
+    <ui:define name="main-body">
+
+        <main>
+            <hr class="my-2"/>
+            <div class="text-center mt-3">
+                <h:link value="Welcome, #{session.getAttribute('username')}" outcome="/view/loginuser/profile.xhtml"
+                        class="h4 text-info">
+                    <f:param value="#{session.getAttribute('userId')}" name="id"/>
+                </h:link>
+            </div>
+
+            <hr class="my-4"/>
+
+            <div class="container">
+
+                <div class="row mb-4 d-flex justify-content-around">
+                    <c:forEach items="#{userHomeBean.users}" var="user">
+
+                        <div class="col-md-3 d-flex flex-column text-center">
+                            <h:graphicImage library="lib" name="/png/#{user.gender}.png" class="img-thumbnail"
+                                            width="200"
+                                            height="200"/>
+                            <h5 class="text-center">#{user.username}</h5>
+                            <h:form>
+                                <h:commandButton action="#{addFriendBean.addFriend(user.id)}" value="Add Friend"
+                                                 class="btn btn-info"/>
+                            </h:form>
+                        </div>
+
+                    </c:forEach>
+                </div>
+
+
+            </div>
+            <hr class="my-3"/>
+        </main>
+
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>

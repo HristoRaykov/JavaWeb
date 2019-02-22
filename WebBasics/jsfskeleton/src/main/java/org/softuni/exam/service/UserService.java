@@ -16,6 +16,9 @@ public interface UserService {
 	
 	Optional<UserServiceModel> getUserByUsername(String username);
 	
+	@SuppressWarnings("Duplicates")
+	Optional<UserServiceModel> getUserById(String id);
+	
 	Optional<UserServiceModel> createUser(UserServiceModel userServiceModel);
 	
 }

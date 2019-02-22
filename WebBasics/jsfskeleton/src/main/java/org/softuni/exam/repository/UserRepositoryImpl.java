@@ -21,10 +21,10 @@ public class UserRepositoryImpl implements UserRepository {
 		this.entityManager.getTransaction().begin();
 		try {
 			this.entityManager.persist(entity);
-		} catch (Exception e) {
-			return Optional.empty();
-		} finally {
 			this.entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			this.entityManager.getTransaction().rollback();
+			return Optional.empty();
 		}
 		
 		return Optional.of(entity);
@@ -46,11 +46,12 @@ public class UserRepositoryImpl implements UserRepository {
 		User user;
 		try {
 			user = this.entityManager.find(User.class, id);
-		} catch (Exception e) {
-			return Optional.empty();
-		} finally {
 			this.entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			this.entityManager.getTransaction().rollback();
+			return Optional.empty();
 		}
+		
 		return Optional.of(user);
 	}
 	
@@ -68,11 +69,12 @@ public class UserRepositoryImpl implements UserRepository {
 					.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
 					.setParameter("username", username)
 					.getSingleResult();
-		} catch (Exception e) {
-			return Optional.empty();
-		} finally {
 			this.entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			this.entityManager.getTransaction().rollback();
+			return Optional.empty();
 		}
+		
 		return Optional.of(user);
 	}
 }

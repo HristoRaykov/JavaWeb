@@ -45,7 +45,7 @@ public class UserLoginBean extends BaseBean {
 		Optional<UserServiceModel> userOptional = this.userService.getUserByUsername(this.userLoginBindingModel.getUsername());
 		String hashedPassword =  DigestUtils.sha256Hex(this.userLoginBindingModel.getPassword());
 		if (userOptional.isEmpty() || !userOptional.get().getPassword().equals(hashedPassword)) {
-			this.redirect("/view/index.xhtml");
+			this.redirect("/view/login.xhtml");
 			return;
 		}
 		
@@ -53,6 +53,6 @@ public class UserLoginBean extends BaseBean {
 		HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		httpSession.setAttribute("username", user.getUsername());
 		httpSession.setAttribute("userId", user.getUsername());
-		this.redirect("/view/loginuser/home.xhtml");
+		this.redirect("/view/home.xhtml");
 	}
 }

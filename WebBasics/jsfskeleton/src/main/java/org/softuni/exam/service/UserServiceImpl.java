@@ -56,12 +56,24 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@SuppressWarnings("Duplicates")
 	public Optional<UserServiceModel> getUserByUsername(String username) {
 		Optional<User> user = this.userRepository.findByUsername(username);
 		if (user.isEmpty()){
 			return Optional.empty();
 		}
 		UserServiceModel userServiceModel = this.modelMapper.map(user.get(),UserServiceModel.class);
+		return Optional.of(userServiceModel);
+	}
+	
+	@Override
+	@SuppressWarnings("Duplicates")
+	public Optional<UserServiceModel> getUserById(String id) {
+		Optional<User> user = this.userRepository.findById(id);
+		if (user.isEmpty()){
+			return Optional.empty();
+		}
+		UserServiceModel userServiceModel = this.modelMapper.map(user.get(), UserServiceModel.class);
 		return Optional.of(userServiceModel);
 	}
 	
