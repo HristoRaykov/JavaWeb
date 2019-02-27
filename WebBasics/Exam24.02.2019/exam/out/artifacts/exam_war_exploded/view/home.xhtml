@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<ui:composition template="/view/templates/base-layout.xhtml">
+
+    <ui:define name="main-body">
+
+        <main class="mt-3">
+            <hr class="bg-exodia hr-2"/>
+            <div class="print-container container-fluid">
+
+                    <c:forEach items="#{userHomeBean.documentViewModels}" var="document" varStatus="iter">
+                        <h:outputText escape="false" rendered="#{iter.index%5==0}"
+                                      value="&lt;div class=&quot;row mb-4 d-flex justify-content-lg-start&quot;&gt;"/>
+                        <div class="print-scheduled col-md-2 mr-4 bg-exodia rounded ">
+                            <h5 class="text-center text-white font-weight-bold py-3 mt-3">
+                                #{document.partialTitle}
+                            </h5>
+                            <hr class="bg-white"/>
+                            <div class="buttons-holder w-75 mx-auto d-flex justify-content-between">
+                                <h:link outcome="/view/print.xhtml" value="Print"
+                                        class="btn bg-exodia text-white font-weight-bold mb-3">
+                                    <f:param name="documentId" value="#{document.id}"/>
+                                </h:link>
+                                <h:link outcome="/view/details.xhtml" value="Details"
+                                        class="btn bg-exodia text-white font-weight-bold mb-3">
+                                    <f:param name="documentId" value="#{document.id}"/>
+                                </h:link>
+                            </div>
+                        </div>
+                        <h:outputText escape="false" rendered="#{iter.index%5==4}"
+                                      value="&lt;/div&gt;"/>
+                    </c:forEach>
+                    <h:outputText escape="false" rendered="#{userHomeBean.documentViewModels.size%5==0}"
+                                  value="&lt;/div&gt;"/>
+
+            </div>
+            <hr class="bg-exodia hr-2 mt-5"/>
+        </main>
+
+    </ui:define>
+
+</ui:composition>
+
+
+</html>
+
